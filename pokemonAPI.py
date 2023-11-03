@@ -9,9 +9,11 @@ import pandas as pd
 # URL de la API de Pokémon para obtener información del Pokémon
 pokemon_api_url = 'https://pokeapi.co/api/v2/pokemon/'
 
-# Conectándose a la base de datos Redshift
+# Cargar variables de entorno desde el archivo .env
+load_dotenv()
+
 try:
-    load_dotenv()
+    # Conectándose a la base de datos Redshift
     connection = psycopg2.connect(
         user='j_mayanavarrete_coderhouse',
         password=os.getenv('PASSWORD'),
@@ -23,7 +25,7 @@ try:
     cursor = connection.cursor()
 
     # Solicitud a la API de Pokémon para obtener información del Pokémon
-    pokemon_name = input("Ingresa nombre de Pokémon a buscar: ").lower()
+    pokemon_name='pikachu'
     response = requests.get(pokemon_api_url + str(pokemon_name))
     pokemon_data = response.json()
 
@@ -35,15 +37,15 @@ try:
 
     # Obtener lista de tipo del Pokémon
     types = [type['type']['name'] for type in pokemon_data['types']] 
-    
+
     # Obtener lista de movimientos del Pokémon
     moves_limit = 3
     moves = [move['move']['name'] for move in pokemon_data['moves'][:moves_limit]]
-    
+
     # Obtener lista de debilidades del Pokémon
     weaknesses_url = f"https://pokeapi.co/api/v2/type/{types[0]}/"
     weaknesses_response = requests.get(weaknesses_url)
-    
+
     if weaknesses_response.status_code == 200:
         weaknesses_data = weaknesses_response.json()
         weaknesses = [t['name'] for t in weaknesses_data['damage_relations']['double_damage_from']]

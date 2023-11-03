@@ -78,7 +78,8 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
-*.txt
 
-cars_clus.csv
-pokemonAPI copy.*
+pokemon.py
+dags/pokemon_dag.py
+pokeeeemon.py
+.gitignore
