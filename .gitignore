@@ -79,7 +79,4 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-pokemon.py
-dags/pokemon_dag.py
-pokeeeemon.py
 .gitignore

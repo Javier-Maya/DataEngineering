@@ -4,6 +4,9 @@ FROM python:3.10
 # Se establece el directorio de trabajo en el contenedor
 WORKDIR /app
 
+# Se agrega la ruta del directorio padre al PYTHONPATH
+ENV PYTHONPATH "${PYTHONPATH}:/app"
+
 # Se copian los archivos a la imagen
 COPY dags /app/dags
 COPY pokemonAPI.py /app
